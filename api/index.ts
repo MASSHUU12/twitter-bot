@@ -24,7 +24,6 @@ const client = twitterClient.readOnly;
 
 // Create Express web server.
 const app: Express = express();
-const port = 8000;
 
 // Enable all CORS requests.
 app.use(cors());
@@ -33,8 +32,7 @@ app.use(cors());
  * Redirect to React app.
  */
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello.");
-  //res.redirect("http://127.0.0.1:3000/");
+  res.redirect("http://127.0.0.1:3000/");
 });
 
 /**
@@ -86,31 +84,13 @@ app.get("/callback", async (req, res) => {
   res.redirect("http://127.0.0.1:3000/dashboard");
 });
 
-let working = false;
-let interval: NodeJS.Timer;
-
 /**
- * Toggle bot.
+ * Post tweet.
  */
-app.get("/toggle", (req: Request, res: Response) => {
-  working = !working;
-
-  if (working)
-    interval = setInterval(
-      postTweet,
-      process.env.BOT_DELAY ? parseInt(process.env.BOT_DELAY) : 10000
-    );
-
-  if (!working) clearInterval(interval);
-
-  res.status(200);
-});
-
-/**
- * Get quotes.
- */
-app.get("/quotes", async (req: Request, res: Response) => {
-  res.json(await getJSON("quotes"));
+app.post("/post", (req: Request, res: Response) => {
+  // TODO: Get data from request.
+  // TODO: Delete quotes.json
+  postTweet();
 });
 
 /**
@@ -123,6 +103,8 @@ app.use((req: Request, res: Response) => {
 /**
  * Run web server.
  */
-app.listen(port, () => {
-  console.log(`[server]:⚡️ Server is running at http://127.0.0.1:${port}.`);
+app.listen(process.env.SERVER_PORT, () => {
+  console.log(
+    `[server]:⚡️ Server is running at http://127.0.0.1:${process.env.SERVER_PORT}.`
+  );
 });

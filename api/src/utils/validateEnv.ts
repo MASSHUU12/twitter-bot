@@ -9,6 +9,7 @@ dotenv.config();
  */
 const validateEnv = (): number => {
   const {
+    SERVER_PORT,
     TWITTER_CLIENT_ID,
     TWITTER_CLIENT_SECRET,
     TWITTER_CALLBACK_URL,
@@ -16,6 +17,7 @@ const validateEnv = (): number => {
   } = process.env;
 
   if (
+    !SERVER_PORT ||
     !TWITTER_CLIENT_ID ||
     !TWITTER_CLIENT_SECRET ||
     !TWITTER_CALLBACK_URL ||

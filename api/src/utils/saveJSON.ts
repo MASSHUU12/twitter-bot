@@ -5,9 +5,6 @@ import jsonfile from "jsonfile";
  *
  * @returns void
  */
-export const saveJSON = (
-  file: "auth" | "tokens" | "quotes",
-  data: {}
-): void => {
+export const saveJSON = (file: "auth" | "tokens", data: {}): void => {
   jsonfile.writeFile(`src/json/${file}.json`, data);
 };

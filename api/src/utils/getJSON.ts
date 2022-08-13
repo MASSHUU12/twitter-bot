@@ -5,9 +5,7 @@ import jsonfile from "jsonfile";
  *
  * @returns Promise<any>
  */
-export const getJSON = async (
-  file: "auth" | "quotes" | "tokens"
-): Promise<any> => {
+export const getJSON = async (file: "auth" | "tokens"): Promise<any> => {
   const res = await jsonfile
     .readFile(`src/json/${file}.json`)
     .then((obj) => obj)
