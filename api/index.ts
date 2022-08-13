@@ -2,16 +2,16 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import { TwitterApi } from "twitter-api-v2";
-import { saveAuth } from "./src/utils/saveAuth.js";
-import { getAuth } from "./src/utils/getAuth.js";
-import { setTokens } from "./src/utils/setTokens.js";
 import { postTweet } from "./src/utils/postTweet.js";
-import { getQuotes } from "./src/utils/getQuotes.js";
+import { getJSON } from "./src/utils/getJSON.js";
+import { saveJSON } from "./src/utils/saveJSON.js";
+import validateEnv from "./src/utils/validateEnv.js";
 
 // Import .env file.
 dotenv.config();
 
-// TODO: Validate .env.
+// Validate .env.
+validateEnv();
 
 // Create TwitterApi object needed for OAuth2.
 const twitterClient = new TwitterApi({
@@ -47,7 +47,10 @@ app.get("/auth", async (req: Request, res: Response) => {
   );
 
   // Send data to database.
-  saveAuth(codeVerifier, state);
+  saveJSON("auth", {
+    codeVerifier: codeVerifier,
+    state: state,
+  });
 
   // Redirect to authorization.
   res.redirect(url);
@@ -56,7 +59,7 @@ app.get("/auth", async (req: Request, res: Response) => {
 // Twitter callback.
 app.get("/callback", async (req, res) => {
   const { state, code } = req.query;
-  const { codeVerifier, state: storedState } = await getAuth();
+  const { codeVerifier, state: storedState } = await getJSON("auth");
 
   if (state !== storedState)
     res.status(404).send("Stored tokens do not match.");
@@ -73,7 +76,10 @@ app.get("/callback", async (req, res) => {
   });
 
   // Store tokens.
-  setTokens(accessToken, refreshToken as string);
+  saveJSON("tokens", {
+    accessToken: accessToken,
+    refreshToken: refreshToken,
+  });
 
   res.redirect("http://127.0.0.1:3000/dashboard");
 });
@@ -98,7 +104,7 @@ app.get("/toggle", (req: Request, res: Response) => {
 
 // Get quotes.
 app.get("/quotes", async (req: Request, res: Response) => {
-  res.json(await getQuotes());
+  res.json(await getJSON("quotes"));
 });
 
 // 404 route
