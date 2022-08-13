@@ -1,15 +1,6 @@
-// import axios from "axios";
-// import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function App() {
-  // useEffect(() => {
-  //   axios({
-  //     method: "get",
-  //     url: "http://127.0.0.1:9000/test",
-  //   }).then((res) => console.log(res));
-  // }, []);
-  //
-
   return (
     <div>
       <h1>Twitter Bot</h1>
@@ -19,12 +10,12 @@ function App() {
       </p>
       <ol>
         <li>
-          Authorize the bot <a href="http://127.0.0.1:9000/auth">here</a>.
+          Authorize the bot <Link to="/auth">here</Link>.
         </li>
         <li>
-          Go to the <a href="/dashboard">dashboard</a>, if it starts without any
-          problems, then add the information to the database to be sent by the
-          bot.
+          Go to the <Link to="/dashboard">dashboard</Link>, if it starts without
+          any problems, then add the information to the database to be sent by
+          the bot.
         </li>
         <li>Run the bot.</li>
       </ol>

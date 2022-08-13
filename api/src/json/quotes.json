@@ -1,1 +1,18 @@
-{}
+[
+  {
+    "quote": "Lorem.",
+    "count": 0
+  },
+  {
+    "quote": "Lorem ipsum.",
+    "count": 1
+  },
+  {
+    "quote": "Lorem ipsum dolor.",
+    "count": 2
+  },
+  {
+    "quote": "Lorem ipsum dolor sit amet.",
+    "count": 3
+  }
+]

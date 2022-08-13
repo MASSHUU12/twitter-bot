@@ -8,3 +8,68 @@ body {
   font-size: 1rem;
   margin: 1rem 5rem;
 }
+
+.btn-toggle-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .toggle-btn {
+    background-color: #1d9bf0;
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+    color: #fff;
+    cursor: pointer;
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .toggle-btn:hover {
+    filter: brightness(85%);
+  }
+
+  .btn-section-time {
+    margin: 0 0 0 1rem;
+  }
+}
+
+.db-records {
+  display: flex;
+  flex-direction: column;
+
+  .db-record {
+    .db-btm {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      .btn-regular {
+        padding: 0.2rem 0.5rem;
+        border-radius: 0.3rem;
+        color: #fff;
+        width: fit-content;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        background-color: #1d9bf0;
+        cursor: pointer;
+      }
+
+      .btn-regular:hover {
+        filter: brightness(85%);
+      }
+
+      .btn-regular-error {
+        background-color: #FD6B68;
+      }
+
+      .btn-regular:first-child {
+        margin: 0 0.5rem 0 0;
+      }
+    }
+  }
+}

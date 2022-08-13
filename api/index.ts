@@ -5,6 +5,8 @@ import { TwitterApi } from "twitter-api-v2";
 import { saveAuth } from "./src/utils/saveAuth.js";
 import { getAuth } from "./src/utils/getAuth.js";
 import { setTokens } from "./src/utils/setTokens.js";
+import { postTweet } from "./src/utils/postTweet.js";
+import { getQuotes } from "./src/utils/getQuotes.js";
 
 // Import .env file.
 dotenv.config();
@@ -76,30 +78,35 @@ app.get("/callback", async (req, res) => {
   res.redirect("http://127.0.0.1:3000/dashboard");
 });
 
-// Run web server.
-app.listen(port, () => {
-  console.log(`🔥 [server]: Server is running at http://127.0.0.1:${port}.`);
+// Toggle bot.
+let working = false;
+let interval: NodeJS.Timer;
+
+app.get("/toggle", (req: Request, res: Response) => {
+  working = !working;
+
+  if (working)
+    interval = setInterval(
+      postTweet,
+      process.env.BOT_DELAY ? parseInt(process.env.BOT_DELAY) : 10000
+    );
+
+  if (!working) clearInterval(interval);
+
+  res.send(working);
 });
 
-// Authenticate user.
-// const generateLink = () => {
-// Create TwitterApi object needed for OAuth2.
-// const twitterClient = new TwitterApi({
-//   clientId: process.env.TWITTER_CLIENT_ID as string,
-//   clientSecret: process.env.TWITTER_CLIENT_SECRET,
-// });
+// Get quotes.
+app.get("/quotes", async (req: Request, res: Response) => {
+  res.json(await getQuotes());
+});
 
-// Set it as readonly.
-// const client = twitterClient.readOnly;
+// 404 route
+app.use((req: Request, res: Response) => {
+  res.status(404).json("Oh noes!");
+});
 
-// const { url, codeVerifier, state } = client.generateOAuth2AuthLink(
-//   process.env.TWITTER_CALLBACK_URL as string,
-//   { scope: ["tweet.read", "tweet.write", "users.read", "offline.access"] }
-// );
-
-// Save data in database.
-// saveAuth(codeVerifier, state);
-
-// Redirect.
-//   window.location.href = url;
-// };
+// Run web server.
+app.listen(port, () => {
+  console.log(`[server]:⚡️ Server is running at http://127.0.0.1:${port}.`);
+});
