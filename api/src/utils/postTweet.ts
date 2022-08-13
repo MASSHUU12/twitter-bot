@@ -1,5 +1,8 @@
-export const postTweet = () => {
-  console.log("Post");
+import { getJSON } from "./getJSON.js";
+
+export const postTweet = async () => {
+  const quotes = await getJSON("quotes");
+  let quote: string;
 
   // const { refreshToken } = await getTokens();
 

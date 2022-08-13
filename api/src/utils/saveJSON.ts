@@ -1,5 +1,13 @@
 import jsonfile from "jsonfile";
 
-export const saveJSON = (file: "auth" | "tokens", data: {}) => {
+/**
+ * Saves the data to a JSON file.
+ *
+ * @returns void
+ */
+export const saveJSON = (
+  file: "auth" | "tokens" | "quotes",
+  data: {}
+): void => {
   jsonfile.writeFile(`src/json/${file}.json`, data);
 };

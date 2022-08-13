@@ -5,14 +5,14 @@
   },
   {
     "quote": "Lorem ipsum.",
-    "count": 1
+    "count": 0
   },
   {
     "quote": "Lorem ipsum dolor.",
-    "count": 2
+    "count": 0
   },
   {
     "quote": "Lorem ipsum dolor sit amet.",
-    "count": 3
+    "count": 0
   }
 ]

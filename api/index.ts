@@ -30,16 +30,16 @@ const port = 8000;
 app.use(cors());
 
 /**
- *| Routes.
+ * Redirect to React app.
  */
-
-// Redirect to React app.
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello.");
   //res.redirect("http://127.0.0.1:3000/");
 });
 
-// Authenticate user.
+/**
+ * Authenticate user.
+ */
 app.get("/auth", async (req: Request, res: Response) => {
   const { url, codeVerifier, state } = client.generateOAuth2AuthLink(
     process.env.TWITTER_CALLBACK_URL as string,
@@ -56,7 +56,9 @@ app.get("/auth", async (req: Request, res: Response) => {
   res.redirect(url);
 });
 
-// Twitter callback.
+/**
+ * Twitter callback.
+ */
 app.get("/callback", async (req, res) => {
   const { state, code } = req.query;
   const { codeVerifier, state: storedState } = await getJSON("auth");
@@ -84,10 +86,12 @@ app.get("/callback", async (req, res) => {
   res.redirect("http://127.0.0.1:3000/dashboard");
 });
 
-// Toggle bot.
 let working = false;
 let interval: NodeJS.Timer;
 
+/**
+ * Toggle bot.
+ */
 app.get("/toggle", (req: Request, res: Response) => {
   working = !working;
 
@@ -99,20 +103,26 @@ app.get("/toggle", (req: Request, res: Response) => {
 
   if (!working) clearInterval(interval);
 
-  res.send(working);
+  res.status(200);
 });
 
-// Get quotes.
+/**
+ * Get quotes.
+ */
 app.get("/quotes", async (req: Request, res: Response) => {
   res.json(await getJSON("quotes"));
 });
 
-// 404 route
+/**
+ * 404 route.
+ */
 app.use((req: Request, res: Response) => {
   res.status(404).json("Oh noes!");
 });
 
-// Run web server.
+/**
+ * Run web server.
+ */
 app.listen(port, () => {
   console.log(`[server]:⚡️ Server is running at http://127.0.0.1:${port}.`);
 });

@@ -11,15 +11,18 @@ const DBRecords = () => {
   >();
 
   useEffect(() => {
+    // Get quotes on page load.
     getRecords();
 
+    // Get quotes from the server every 5s.
     const interval = setInterval(() => {
       getRecords();
-    }, 10000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
 
+  // Get quotes from the server.
   const getRecords = () => {
     Axios.get("/quotes").then((res) => {
       setRecords(res.data);

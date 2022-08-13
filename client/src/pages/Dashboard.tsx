@@ -1,14 +1,13 @@
-import axios from "axios";
 import DBRecords from "../components/DBRecords";
 import Toggle from "../components/Toggle";
+import Axios from "../helpers/axios";
 
 const Dashboard = () => {
   // Toggle bot.
   const toggleBot = () => {
-    axios({
-      method: "get",
-      url: "http://127.0.0.1:8000/toggle",
-    }).then((res) => console.log(res));
+    Axios.get("/toggle")
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
   };
 
   return (
