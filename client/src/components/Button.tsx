@@ -7,7 +7,9 @@ interface Props {
 const Button = ({ variant, text, action }: Props) => {
   return (
     <div
-      className={`btn-regular ${variant === "error" && "btn-regular-error"}`}
+      className={`btn-regular${
+        variant === "error" ? " btn-regular-error" : ""
+      }`}
       onClick={action}
     >
       <span>{text}</span>

@@ -1,3 +1,4 @@
+import AddRecords from "../components/AddRecords";
 import DBRecords from "../components/DBRecords";
 import Toggle from "../components/Toggle";
 import Axios from "../helpers/axios";
@@ -16,6 +17,7 @@ const Dashboard = () => {
       <div className="btn-toggle-section">
         <Toggle title="Start bot" toggleTitle="Stop bot" action={toggleBot} />
       </div>
+      <AddRecords />
       <DBRecords />
     </div>
   );

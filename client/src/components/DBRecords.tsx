@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import Button from "./Button";
 
 const DBRecords = () => {
-  const [records, setRecords] = useState<
-    {
+  const [records, setRecords] = useState<{
+    data: {
       data: string;
       count: number;
-    }[]
-  >();
+    }[];
+  }>();
 
   useEffect(() => {
     // Get records on page load.
@@ -23,19 +23,21 @@ const DBRecords = () => {
 
   // Get records from the Web Storage.
   const getRecords = () => {
-    localStorage.setItem(
-      "data",
-      JSON.stringify([
-        {
-          data: "Lorem ipsum.",
-          count: 0,
-        },
-        {
-          data: "Lorem ipsum dolor sit amet.",
-          count: 0,
-        },
-      ])
-    );
+    // localStorage.setItem(
+    //   "data",
+    //   JSON.stringify({
+    //     data: [
+    //       {
+    //         data: "Lorem ipsum.",
+    //         count: 0,
+    //       },
+    //       {
+    //         data: "Lorem ipsum dolor sit amet.",
+    //         count: 0,
+    //       },
+    //     ],
+    //   })
+    // );
 
     setRecords(JSON.parse(localStorage.getItem("data") as string));
   };
@@ -43,9 +45,14 @@ const DBRecords = () => {
   return (
     <div className="db-records-container">
       <h3>Records</h3>
+      <Button
+        variant="regular"
+        text="Import JSON"
+        action={() => console.log("Import json")}
+      />
       <div className="db-records">
         {records
-          ? records.map((item, key) => {
+          ? records["data"].map((item, key) => {
               return (
                 <div className="db-record" key={key}>
                   <div className="db-top">

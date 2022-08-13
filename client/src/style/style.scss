@@ -36,6 +36,23 @@ body {
   }
 }
 
+.add-records-container {
+  margin: 2rem 0;
+
+  textarea {
+    padding: 1rem;
+    width: 50%;
+    height: 10rem;
+    max-width: 100%;
+    line-height: 1.5;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px #999;
+    margin: 0 0 0.3rem;
+    resize: none;
+  }
+}
+
 .db-records {
   display: flex;
   flex-direction: column;
@@ -45,31 +62,31 @@ body {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-
-      .btn-regular {
-        padding: 0.2rem 0.5rem;
-        border-radius: 0.3rem;
-        color: #fff;
-        width: fit-content;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        background-color: #1d9bf0;
-        cursor: pointer;
-      }
-
-      .btn-regular:hover {
-        filter: brightness(85%);
-      }
-
-      .btn-regular-error {
-        background-color: #FD6B68;
-      }
-
-      .btn-regular:first-child {
-        margin: 0 0.5rem 0 0;
-      }
     }
   }
+}
+
+.btn-regular {
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.3rem;
+  color: #fff;
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #1d9bf0;
+  cursor: pointer;
+}
+
+.btn-regular:hover {
+  filter: brightness(85%);
+}
+
+.btn-regular-error {
+  background-color: #FD6B68;
+}
+
+.btn-regular:first-child {
+  margin: 0 0.5rem 0 0;
 }
