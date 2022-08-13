@@ -13,7 +13,7 @@ const AddRecords = () => {
     const records = JSON.parse(localStorage.getItem("data") as string);
 
     records["data"].push({
-      data: value,
+      data: value.split("\n"),
       count: 0,
     });
 
@@ -22,7 +22,6 @@ const AddRecords = () => {
     setValue("");
   };
 
-  // TODO: Save lines as array to support 'multiline'.
   return (
     <div className="add-records-container">
       <textarea

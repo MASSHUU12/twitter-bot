@@ -4,7 +4,7 @@ import Button from "./Button";
 const DBRecords = () => {
   const [records, setRecords] = useState<{
     data: {
-      data: string;
+      data: string[];
       count: number;
     }[];
   }>();
@@ -28,11 +28,11 @@ const DBRecords = () => {
     //   JSON.stringify({
     //     data: [
     //       {
-    //         data: "Lorem ipsum.",
+    //         data: ["Lorem ipsum."],
     //         count: 0,
     //       },
     //       {
-    //         data: "Lorem ipsum dolor sit amet.",
+    //         data: ["Lorem ipsum", "dolor sit amet."],
     //         count: 0,
     //       },
     //     ],
@@ -56,10 +56,11 @@ const DBRecords = () => {
               return (
                 <div className="db-record" key={key}>
                   <div className="db-top">
-                    <p className="db-record-text">
-                      <span>Text: </span>
-                      {item.data}
-                    </p>
+                    <textarea
+                      className="db-record-text"
+                      readOnly
+                      value={item.data.join("\n")}
+                    ></textarea>
                     <p className="db-record-counter">
                       <span>Count: </span>
                       {item.count}
