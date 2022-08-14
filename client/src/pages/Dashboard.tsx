@@ -4,12 +4,13 @@ import DBRecords from "../components/DBRecords";
 import Toggle from "../components/Toggle";
 import { getRecord } from "../helpers/getRecord";
 // import Axios from "../helpers/axios";
+import env from "react-dotenv";
 
 const Dashboard = () => {
   const interval = useRef<null | NodeJS.Timer>(null);
   const [dSeconds, setDSeconds] = useState(0);
   const seconds = useRef(0);
-  const time = process.env.BOT_DELAY ? parseInt(process.env.BOT_DELAY) : 86400;
+  const time = env.BOT_DELAY ? parseInt(env.BOT_DELAY) : 86400;
 
   // Toggle bot.
   const toggleBot = () => {
