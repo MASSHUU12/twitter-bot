@@ -43,7 +43,7 @@ To run the client for the first time, use in the terminal:
 > npm start
 ```
 
-> Przy każdym kolejnym uruchomieniu nie musisz używać `npm i`.
+> Each time you run bot again, you don't have to use `npm i`.
 
 Now when you go to http://127.0.0.1:8000/ in your browser (if you changed the port, use it instead of 8000), you should see what to do next.
 
