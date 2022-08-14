@@ -3,7 +3,7 @@ import AddRecords from "../components/AddRecords";
 import DBRecords from "../components/DBRecords";
 import Toggle from "../components/Toggle";
 import { getRecord } from "../helpers/getRecord";
-// import Axios from "../helpers/axios";
+import Axios from "../helpers/axios";
 import env from "react-dotenv";
 
 const Dashboard = () => {
@@ -26,16 +26,26 @@ const Dashboard = () => {
 
   // Call server to post tweet.
   const tweet = () => {
-    // Axios.post("/tweet")
-    //   .then((res) => console.log(res.data))
-    //   .catch((err) => console.log(err));
-
     seconds.current++;
+
+    // Update time on dashboard.
     setDSeconds(seconds.current);
 
     if (seconds.current >= time) {
       seconds.current = 0;
-      console.log(getRecord().data);
+
+      // Call an API.
+      Axios.request({
+        url: "/tweet",
+        method: "post",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        data: { data: getRecord().data },
+      })
+        .then(() => console.log("Send"))
+        .catch((err) => console.log(err));
     }
   };
 

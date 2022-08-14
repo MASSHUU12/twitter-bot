@@ -28,6 +28,12 @@ const app: Express = express();
 // Enable all CORS requests.
 app.use(cors());
 
+// Parsing application/json
+app.use(express.json());
+
+// Parsing application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+
 /**
  * Redirect to React app.
  */
@@ -87,10 +93,8 @@ app.get("/callback", async (req, res) => {
 /**
  * Post tweet.
  */
-app.post("/post", (req: Request, res: Response) => {
-  // TODO: Get data from request.
-  // TODO: Delete quotes.json
-  postTweet();
+app.post("/tweet", (req: Request, res: Response) => {
+  postTweet(client, req.body.data);
 });
 
 /**

@@ -8,6 +8,7 @@ import Button from "./Button";
  */
 const AddRecords = () => {
   const [value, setValue] = useState("");
+  const [length, setLength] = useState(0);
 
   const addRecord = () => {
     if (value.length < 1) return;
@@ -26,13 +27,19 @@ const AddRecords = () => {
 
   return (
     <div className="add-records-container">
-      <textarea
-        minLength={1}
-        maxLength={512}
-        placeholder="Lorem ipsum dolor sit amet."
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      ></textarea>
+      <div className="add-records-inputarea">
+        <textarea
+          minLength={1}
+          maxLength={512}
+          placeholder="Lorem ipsum dolor sit amet."
+          value={value}
+          onChange={(e) => {
+            setValue(e.target.value);
+            setLength(e.target.value.length);
+          }}
+        ></textarea>
+        <span>{length}/512</span>
+      </div>
       <Button variant="regular" text="Add record" action={() => addRecord()} />
     </div>
   );
