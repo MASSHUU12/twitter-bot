@@ -13,9 +13,7 @@ function App() {
           Authorize the bot <Link to="/auth">here</Link>.
         </li>
         <li>
-          Go to the <Link to="/dashboard">dashboard</Link>, if it starts without
-          any problems, then add the information to the database to be sent by
-          the bot.
+          Go to the <Link to="/dashboard">dashboard</Link>.
         </li>
         <li>Run the bot.</li>
       </ol>
