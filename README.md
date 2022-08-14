@@ -50,3 +50,24 @@ Now when you go to http://127.0.0.1:8000/ in your browser (if you changed the po
 #### [Optional] Changing the time a bot posts on Twitter.
 
 You can change the time in the .env file located in `./client/.env`.
+
+### Importing JSON files.
+
+The program supports importing JSON files. The file must not exceed 5MB and must consist of an appropriate structure:
+
+> Each member of the array corresponds to another line of text.
+
+```json
+{
+  "data": [
+    {
+      "data": ["Lorem ipsum", "dolor sit amet."],
+      "count": 0
+    },
+    {
+      "data": ["Lorem ipsum."],
+      "count": 0
+    }
+  ]
+}
+```
