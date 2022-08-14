@@ -1,16 +1,19 @@
 import { useState } from "react";
 import Button from "./Button";
 import { Icon } from "@iconify/react";
-import { useAppDispatch } from "../app/hooks";
-import { toggle } from "../features/editSlice";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { editOff } from "../features/editSlice";
+import { updateRecords } from "../helpers/updateRecords";
 
 /**
  * Update records in database.
  */
 const UpdateScreen = () => {
-  const [text, setText] = useState("");
-  const [length, setLength] = useState(0);
+  const { index, text: t } = useAppSelector((state) => state.edit);
   const dispatch = useAppDispatch();
+
+  const [text, setText] = useState(t);
+  const [length, setLength] = useState(0);
 
   return (
     <div className="update-screen-container">
@@ -18,7 +21,7 @@ const UpdateScreen = () => {
         <Icon
           icon="ep:close-bold"
           width="32"
-          onClick={() => dispatch(toggle())}
+          onClick={() => dispatch(editOff())}
         />
         <div className="update-screen-inputarea">
           <textarea
@@ -36,7 +39,7 @@ const UpdateScreen = () => {
         <Button
           variant="regular"
           text="Update record"
-          action={() => console.log("update")}
+          action={() => updateRecords(text, index)}
         />
       </div>
     </div>

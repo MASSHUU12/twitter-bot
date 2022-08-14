@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { toggle } from "../features/editSlice";
+import { editOn } from "../features/editSlice";
 import { deleteRecord } from "../helpers/deleteRecord";
 import Button from "./Button";
 import UpdateScreen from "./UpdateScreen";
@@ -61,7 +61,17 @@ const DBRecords = () => {
                       <Button
                         variant="regular"
                         text="Edit record"
-                        action={(e) => dispatch(toggle())}
+                        action={(e) =>
+                          dispatch(
+                            editOn({
+                              index:
+                                e.target["parentElement"]["parentElement"][
+                                  "parentElement"
+                                ].getAttribute("data-index"),
+                              text: item.data.join("\n"),
+                            })
+                          )
+                        }
                       />
                       <Button
                         variant="error"

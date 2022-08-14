@@ -4,14 +4,25 @@ export const editSlice = createSlice({
   name: "edit",
   initialState: {
     value: false,
+    index: 0,
+    text: "",
   },
   reducers: {
-    toggle: (state: { value: boolean }) => {
-      state.value = !state.value;
+    editOn: (
+      state: { value: boolean; index: number; text: string },
+      action: { payload: { index: number; text: string } }
+    ) => {
+      state.value = true;
+      state.index = action.payload.index;
+      state.text = action.payload.text;
+    },
+    editOff: (state: { value: boolean; index: number }) => {
+      state.value = false;
+      state.index = 0;
     },
   },
 });
 
-export const { toggle } = editSlice.actions;
+export const { editOn, editOff } = editSlice.actions;
 
 export default editSlice.reducer;

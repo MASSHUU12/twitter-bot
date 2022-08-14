@@ -23,6 +23,7 @@ const AddRecords = () => {
     localStorage.setItem("data", JSON.stringify(records));
 
     setValue("");
+    setLength(0);
   };
 
   return (
