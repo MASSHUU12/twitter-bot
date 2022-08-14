@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { toggle } from "../features/editSlice";
 import { deleteRecord } from "../helpers/deleteRecord";
 import Button from "./Button";
+import UpdateScreen from "./UpdateScreen";
 
 const DBRecords = () => {
   const [records, setRecords] = useState<{
@@ -9,6 +12,8 @@ const DBRecords = () => {
       count: number;
     }[];
   }>();
+  const openEdit = useAppSelector((state) => state.edit.value);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     // Get records on page load.
@@ -28,53 +33,56 @@ const DBRecords = () => {
   };
 
   return (
-    <div className="db-records-container">
-      <h3>Records</h3>
-      <Button
-        variant="regular"
-        text="Import JSON"
-        action={() => console.log("Import json")}
-      />
-      <div className="db-records">
-        {records
-          ? records["data"].map((item, key) => {
-              return (
-                <div className="db-record" key={key} data-index={key}>
-                  <div className="db-top">
-                    <textarea
-                      className="db-record-text"
-                      readOnly
-                      value={item.data.join("\n")}
-                    ></textarea>
-                    <p className="db-record-counter">
-                      <span>Count: </span>
-                      {item.count}
-                    </p>
+    <>
+      <div className="db-records-container">
+        <h3>Records</h3>
+        <Button
+          variant="regular"
+          text="Import JSON"
+          action={() => console.log("Import json")}
+        />
+        <div className="db-records">
+          {records
+            ? records["data"].map((item, key) => {
+                return (
+                  <div className="db-record" key={key} data-index={key}>
+                    <div className="db-top">
+                      <textarea
+                        className="db-record-text"
+                        readOnly
+                        value={item.data.join("\n")}
+                      ></textarea>
+                      <p className="db-record-counter">
+                        <span>Count: </span>
+                        {item.count}
+                      </p>
+                    </div>
+                    <div className="db-btm">
+                      <Button
+                        variant="regular"
+                        text="Edit record"
+                        action={(e) => dispatch(toggle())}
+                      />
+                      <Button
+                        variant="error"
+                        text="Delete record"
+                        action={(e) =>
+                          deleteRecord(
+                            e.target["parentElement"]["parentElement"][
+                              "parentElement"
+                            ].getAttribute("data-index")
+                          )
+                        }
+                      />
+                    </div>
                   </div>
-                  <div className="db-btm">
-                    <Button
-                      variant="regular"
-                      text="Edit record"
-                      action={(e) => console.log("Edit")}
-                    />
-                    <Button
-                      variant="error"
-                      text="Delete record"
-                      action={(e) =>
-                        deleteRecord(
-                          e.target["parentElement"]["parentElement"][
-                            "parentElement"
-                          ].getAttribute("data-index")
-                        )
-                      }
-                    />
-                  </div>
-                </div>
-              );
-            })
-          : "There are no records."}
+                );
+              })
+            : "There are no records."}
+        </div>
       </div>
-    </div>
+      {openEdit && <UpdateScreen />}
+    </>
   );
 };
 
