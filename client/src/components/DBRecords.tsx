@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { editOn } from "../features/editSlice";
 import { editRecords } from "../features/recordsSlice";
 import { deleteRecord } from "../helpers/deleteRecord";
+import { importRecords } from "../helpers/importRecords";
 import Button from "./Button";
 import UpdateScreen from "./UpdateScreen";
 
@@ -11,26 +12,64 @@ const DBRecords = () => {
   const openEdit = useAppSelector((state) => state.edit.value);
   const dispatch = useAppDispatch();
 
+  const fileRef = useRef<any>(null);
+
   useEffect(() => {
     // Get records on page load and send it to Redux.
     dispatch(editRecords(JSON.parse(localStorage.getItem("data") as string)));
   }, [dispatch]);
 
+  const openFileDialog = () => {
+    if (fileRef.current instanceof HTMLElement !== true) return;
+    fileRef.current.click();
+  };
+
+  const handleFileInput = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Check if file exists.
+    if (e.target.files![0] === null) return;
+
+    // Get file info.
+    const f = e.target.files!.item(0);
+
+    // Check if file too large.
+    if (f!.size > 500000000) {
+      console.error("File too large.");
+      return;
+    }
+
+    // Read file.
+    const reader = await f!.text();
+
+    // Import file.
+    importRecords(reader);
+  };
+
   return (
     <>
       <div className="db-records-container">
         <h3>Records</h3>
+        {/* Import button */}
         <Button
           variant="regular"
           text="Import JSON"
-          action={() => console.log("Import json")}
+          action={() => openFileDialog()}
+        />
+        {/* File input */}
+        <input
+          type="file"
+          accept=".json"
+          ref={fileRef}
+          onChange={(e) => handleFileInput(e)}
+          style={{ display: "none" }}
         />
         <div className="db-records">
+          {/* Records */}
           {records
             ? records["data"].map((item, key) => {
                 return (
                   <div className="db-record" key={key} data-index={key}>
                     <div className="db-top">
+                      {/* Textarea */}
                       <textarea
                         className="db-record-text"
                         readOnly
@@ -41,6 +80,7 @@ const DBRecords = () => {
                         {item.count}
                       </p>
                     </div>
+                    {/* Buttons */}
                     <div className="db-btm">
                       <Button
                         variant="regular"
