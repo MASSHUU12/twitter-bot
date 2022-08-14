@@ -23,22 +23,6 @@ const DBRecords = () => {
 
   // Get records from the Web Storage.
   const getRecords = () => {
-    // localStorage.setItem(
-    //   "data",
-    //   JSON.stringify({
-    //     data: [
-    //       {
-    //         data: ["Lorem ipsum.", "               Test."],
-    //         count: 1,
-    //       },
-    //       {
-    //         data: ["Lorem ipsum", "dolor sit amet."],
-    //         count: 2,
-    //       },
-    //     ],
-    //   })
-    // );
-
     setRecords(JSON.parse(localStorage.getItem("data") as string));
   };
 
