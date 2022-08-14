@@ -28,8 +28,8 @@ const DBRecords = () => {
     //   JSON.stringify({
     //     data: [
     //       {
-    //         data: ["Lorem ipsum."],
-    //         count: 3,
+    //         data: ["Lorem ipsum.", "               Test."],
+    //         count: 1,
     //       },
     //       {
     //         data: ["Lorem ipsum", "dolor sit amet."],

@@ -10,6 +10,8 @@ const AddRecords = () => {
   const [value, setValue] = useState("");
 
   const addRecord = () => {
+    if (value.length < 1) return;
+
     const records = JSON.parse(localStorage.getItem("data") as string);
 
     records["data"].push({
