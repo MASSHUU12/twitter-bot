@@ -29,11 +29,11 @@ const DBRecords = () => {
     //     data: [
     //       {
     //         data: ["Lorem ipsum."],
-    //         count: 0,
+    //         count: 3,
     //       },
     //       {
     //         data: ["Lorem ipsum", "dolor sit amet."],
-    //         count: 0,
+    //         count: 2,
     //       },
     //     ],
     //   })

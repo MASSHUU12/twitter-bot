@@ -1,14 +1,31 @@
+import { useRef } from "react";
 import AddRecords from "../components/AddRecords";
 import DBRecords from "../components/DBRecords";
 import Toggle from "../components/Toggle";
-import Axios from "../helpers/axios";
+import { getRecord } from "../helpers/getRecord";
+// import Axios from "../helpers/axios";
 
 const Dashboard = () => {
+  const interval = useRef<null | NodeJS.Timer>(null);
+
   // Toggle bot.
   const toggleBot = () => {
-    Axios.get("/toggle")
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
+    if (interval.current === null) {
+      tweet();
+      interval.current = setInterval(() => tweet(), 1000);
+    } else {
+      clearInterval(interval.current);
+      interval.current = null;
+    }
+  };
+
+  // Call server to post tweet.
+  const tweet = () => {
+    // Axios.post("/tweet")
+    //   .then((res) => console.log(res.data))
+    //   .catch((err) => console.log(err));
+
+    console.log(getRecord());
   };
 
   return (
