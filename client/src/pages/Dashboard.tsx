@@ -25,7 +25,7 @@ const Dashboard = () => {
     //   .then((res) => console.log(res.data))
     //   .catch((err) => console.log(err));
 
-    console.log(getRecord());
+    console.log(getRecord().data);
   };
 
   return (
