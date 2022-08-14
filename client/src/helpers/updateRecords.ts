@@ -1,3 +1,6 @@
+import store from "../app/store";
+import { editRecords } from "../features/recordsSlice";
+
 /**
  * Edit specific record.
  *
@@ -14,4 +17,5 @@ export const updateRecords = (text: string, index: number): void => {
 
   // Save records.
   localStorage.setItem("data", JSON.stringify(records));
+  store.dispatch(editRecords(records));
 };

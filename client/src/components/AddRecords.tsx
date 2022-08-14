@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useAppDispatch } from "../app/hooks";
+import { editRecords } from "../features/recordsSlice";
 import Button from "./Button";
 
 /**
@@ -9,6 +11,7 @@ import Button from "./Button";
 const AddRecords = () => {
   const [value, setValue] = useState("");
   const [length, setLength] = useState(0);
+  const dispath = useAppDispatch();
 
   const addRecord = () => {
     if (value.length < 1) return;
@@ -20,7 +23,9 @@ const AddRecords = () => {
       count: 0,
     });
 
+    // Update records in Web Storage and Redux.
     localStorage.setItem("data", JSON.stringify(records));
+    dispath(editRecords(records));
 
     setValue("");
     setLength(0);

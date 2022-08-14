@@ -1,3 +1,6 @@
+import store from "../app/store";
+import { editRecords } from "../features/recordsSlice";
+
 /**
  * Search for the record with the smallest count.
  */
@@ -23,6 +26,7 @@ export const getRecord = () => {
   // Update count for the selected item.
   records["data"][recordRef.index].count += 1;
   localStorage.setItem("data", JSON.stringify(records));
+  store.dispatch(editRecords(records));
 
   return records["data"][recordRef.index];
 };

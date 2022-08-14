@@ -39,7 +39,10 @@ const UpdateScreen = () => {
         <Button
           variant="regular"
           text="Update record"
-          action={() => updateRecords(text, index)}
+          action={() => {
+            updateRecords(text, index);
+            dispatch(editOff());
+          }}
         />
       </div>
     </div>

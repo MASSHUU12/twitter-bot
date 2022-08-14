@@ -1,36 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { editOn } from "../features/editSlice";
+import { editRecords } from "../features/recordsSlice";
 import { deleteRecord } from "../helpers/deleteRecord";
 import Button from "./Button";
 import UpdateScreen from "./UpdateScreen";
 
 const DBRecords = () => {
-  const [records, setRecords] = useState<{
-    data: {
-      data: string[];
-      count: number;
-    }[];
-  }>();
+  const records = useAppSelector((state) => state.records.value);
   const openEdit = useAppSelector((state) => state.edit.value);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // Get records on page load.
-    getRecords();
-
-    // Get records every 5s.
-    const interval = setInterval(() => {
-      getRecords();
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  // Get records from the Web Storage.
-  const getRecords = () => {
-    setRecords(JSON.parse(localStorage.getItem("data") as string));
-  };
+    // Get records on page load and send it to Redux.
+    dispatch(editRecords(JSON.parse(localStorage.getItem("data") as string)));
+  }, [dispatch]);
 
   return (
     <>
