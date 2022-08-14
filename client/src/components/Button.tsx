@@ -1,7 +1,7 @@
 interface Props {
   variant: "regular" | "error";
   text: string;
-  action: () => any;
+  action: (e: any) => any;
 }
 
 const Button = ({ variant, text, action }: Props) => {
@@ -10,7 +10,7 @@ const Button = ({ variant, text, action }: Props) => {
       className={`btn-regular${
         variant === "error" ? " btn-regular-error" : ""
       }`}
-      onClick={action}
+      onClick={(e) => action(e)}
     >
       <span>{text}</span>
     </div>

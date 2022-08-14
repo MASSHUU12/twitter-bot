@@ -54,7 +54,7 @@ const Dashboard = () => {
       <h1>Dashboard</h1>
       <div className="btn-toggle-section">
         <Toggle title="Start bot" toggleTitle="Stop bot" action={toggleBot} />
-        <p>{`${dSeconds}/${time}`}</p>
+        <p>{`${dSeconds}/${time}`}s</p>
       </div>
       <AddRecords />
       <DBRecords />

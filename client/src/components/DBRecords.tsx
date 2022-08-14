@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { deleteRecord } from "../helpers/deleteRecord";
 import Button from "./Button";
 
 const DBRecords = () => {
@@ -38,7 +39,7 @@ const DBRecords = () => {
         {records
           ? records["data"].map((item, key) => {
               return (
-                <div className="db-record" key={key}>
+                <div className="db-record" key={key} data-index={key}>
                   <div className="db-top">
                     <textarea
                       className="db-record-text"
@@ -54,12 +55,18 @@ const DBRecords = () => {
                     <Button
                       variant="regular"
                       text="Edit record"
-                      action={() => console.log("Edit")}
+                      action={(e) => console.log("Edit")}
                     />
                     <Button
                       variant="error"
                       text="Delete record"
-                      action={() => console.log("Delete")}
+                      action={(e) =>
+                        deleteRecord(
+                          e.target["parentElement"]["parentElement"][
+                            "parentElement"
+                          ].getAttribute("data-index")
+                        )
+                      }
                     />
                   </div>
                 </div>
