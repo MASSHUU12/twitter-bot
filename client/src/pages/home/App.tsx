@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 
-function App() {
+/**
+ * Homepage.
+ *
+ * @returns JSX.Element
+ */
+function App(): JSX.Element {
   return (
     <div>
       <h1>Twitter Bot</h1>

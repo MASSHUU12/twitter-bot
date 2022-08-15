@@ -4,8 +4,14 @@ import { editRecords } from "../../features/recordsSlice";
 /**
  * Search for the record with the smallest count.
  */
-export const getRecord = () => {
-  const records = JSON.parse(localStorage.getItem("data") as string);
+export const getRecord = (): {
+  data: string;
+  count: number;
+} => {
+  // Get records from database.
+  const records: { data: [{ data: string; count: number }] } = JSON.parse(
+    localStorage.getItem("data") as string
+  );
 
   // Store item reference.
   const recordRef = {
@@ -25,8 +31,11 @@ export const getRecord = () => {
 
   // Update count for the selected item.
   records["data"][recordRef.index].count += 1;
+
+  // Save updated records in database and Redux.
   localStorage.setItem("data", JSON.stringify(records));
   store.dispatch(editRecords(records));
 
+  // Return record with smallest count.
   return records["data"][recordRef.index];
 };

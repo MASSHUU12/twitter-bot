@@ -7,6 +7,15 @@ interface Props {
   action: () => any;
 }
 
+/**
+ * Toggle button component.
+ *
+ * @param title - string
+ * @param toggleTitle - string
+ * @param action - () => any
+ *
+ * @returns JSX.Element
+ */
 const Toggle = ({ title, toggleTitle, action }: Props): JSX.Element => {
   const [toggle, setToggle] = useState<boolean>(true);
 

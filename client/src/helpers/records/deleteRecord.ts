@@ -3,8 +3,11 @@ import { editRecords } from "../../features/recordsSlice";
 
 /**
  * Delete specific record.
+ *
+ * @return void
  */
 export const deleteRecord = (id: number): void => {
+  // Get records from database.
   const records: { data: [{ data: string; count: number }] } = JSON.parse(
     localStorage.getItem("data") as string
   );

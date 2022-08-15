@@ -4,7 +4,16 @@ interface Props {
   action: (e: any) => any;
 }
 
-const Button = ({ variant, text, action }: Props) => {
+/**
+ * Custom button component.
+ *
+ * @param variant - error | regular
+ * @param text - string
+ * @param action - (e: any) => any
+ *
+ * @returns JSX.Element
+ */
+const Button = ({ variant, text, action }: Props): JSX.Element => {
   return (
     <div
       className={`btn-regular${

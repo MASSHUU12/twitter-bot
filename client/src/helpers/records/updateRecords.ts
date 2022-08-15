@@ -6,8 +6,11 @@ import { editRecords } from "../../features/recordsSlice";
  *
  * @param text string
  * @param index number
+ *
+ * @returns void
  */
 export const updateRecords = (text: string, index: number): void => {
+  // Get records from database.
   const records: { data: [{ data: string[]; count: number }] } = JSON.parse(
     localStorage.getItem("data") as string
   );

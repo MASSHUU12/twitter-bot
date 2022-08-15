@@ -23,7 +23,7 @@ Set `Callback URI / Redirect URL` as `http://127.0.0.1:8000/callback` (port you 
 
 Set the `Website URL` to anything.
 
-Save `Client ID` and `Client Secret` in `.env` file located `./api/.env` (If you changed the port in the earlier section, you must also change it in .env.).
+Save `Client ID` and `Client Secret` in `.env` file located `./api/.env` (If you changed the port in the earlier section, you must also change it in both .env. files).
 
 ### The first bot launch.
 

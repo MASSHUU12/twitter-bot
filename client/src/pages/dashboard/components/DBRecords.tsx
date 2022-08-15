@@ -7,23 +7,41 @@ import { importRecords } from "../../../helpers/records/importRecords";
 import Button from "../../../components/Button";
 import UpdateScreen from "./UpdateScreen";
 
-const DBRecords = () => {
+/**
+ * Manages database records.
+ *
+ * @returns JSX.Element
+ */
+const DBRecords = (): JSX.Element => {
+  // Holds records from Redux.
   const records = useAppSelector((state) => state.records.value);
+
+  // Indicates whether edit window should be open.
   const openEdit = useAppSelector((state) => state.edit.value);
   const dispatch = useAppDispatch();
 
+  // Reference for file input.
   const fileRef = useRef<any>(null);
 
-  useEffect(() => {
-    // Get records on page load and send it to Redux.
-    dispatch(editRecords(JSON.parse(localStorage.getItem("data") as string)));
-  }, [dispatch]);
-
-  const openFileDialog = () => {
+  /**
+   * Opens file dialog.
+   *
+   * @returns void
+   */
+  const openFileDialog = (): void => {
+    // If something is wrong do nothing.
     if (fileRef.current instanceof HTMLElement !== true) return;
+
+    // Open file dialog.
     fileRef.current.click();
   };
 
+  /**
+   * Handles file input.
+   *
+   * @param e React.ChangeEvent<HTMLInputElement>
+   * @returns Promise<void>
+   */
   const handleFileInput = async (e: React.ChangeEvent<HTMLInputElement>) => {
     // Check if file exists.
     if (e.target.files![0] === null) return;
@@ -43,6 +61,11 @@ const DBRecords = () => {
     // Import file.
     importRecords(reader);
   };
+
+  useEffect(() => {
+    // Get records every time they change.
+    dispatch(editRecords(JSON.parse(localStorage.getItem("data") as string)));
+  }, [dispatch]);
 
   return (
     <>

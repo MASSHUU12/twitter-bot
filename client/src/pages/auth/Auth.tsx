@@ -1,6 +1,11 @@
 import { useEffect } from "react";
 
-const Auth = () => {
+/**
+ * Authorization page.
+ *
+ * @returns JSX.Element
+ */
+const Auth = (): JSX.Element => {
   // Redirect to authorization.
   useEffect(() => {
     window.location.href = "http://127.0.0.1:8000/auth";

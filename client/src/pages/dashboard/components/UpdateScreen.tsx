@@ -7,8 +7,11 @@ import { updateRecords } from "../../../helpers/records/updateRecords";
 
 /**
  * Update records in database.
+ *
+ * @returns JSX.Element
  */
-const UpdateScreen = () => {
+const UpdateScreen = (): JSX.Element => {
+  // Get info about record to edit.
   const { index, text: t } = useAppSelector((state) => state.edit);
   const dispatch = useAppDispatch();
 
@@ -18,12 +21,14 @@ const UpdateScreen = () => {
   return (
     <div className="update-screen-container">
       <div className="update-screen">
+        {/* Close icon */}
         <Icon
           icon="ep:close-bold"
           width="32"
           onClick={() => dispatch(editOff())}
         />
         <div className="update-screen-inputarea">
+          {/* Textarea */}
           <textarea
             minLength={1}
             maxLength={512}
@@ -36,6 +41,7 @@ const UpdateScreen = () => {
           ></textarea>
           <span>{length}/512</span>
         </div>
+        {/* Button */}
         <Button
           variant="regular"
           text="Update record"

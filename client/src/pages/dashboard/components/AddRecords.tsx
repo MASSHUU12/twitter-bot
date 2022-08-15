@@ -1,32 +1,29 @@
 import { useState } from "react";
-import { useAppDispatch } from "../../../app/hooks";
-import { editRecords } from "../../../features/recordsSlice";
 import Button from "../../../components/Button";
+import { addRecord } from "../../../helpers/records/addRecord";
 
 /**
  * Add record to database.
  *
- * @returns void
+ * @returns JSX.Element
  */
-const AddRecords = () => {
+const AddRecords = (): JSX.Element => {
   const [value, setValue] = useState("");
   const [length, setLength] = useState(0);
-  const dispath = useAppDispatch();
 
-  const addRecord = () => {
+  /**
+   * Handles add record button.
+   *
+   * @returns void
+   */
+  const handleAddBtn = (): void => {
+    // If textarea is empty, do nothing.
     if (value.length < 1) return;
 
-    const records = JSON.parse(localStorage.getItem("data") as string);
+    // Add record.
+    addRecord(value);
 
-    records["data"].push({
-      data: value.split("\n"),
-      count: 0,
-    });
-
-    // Update records in Web Storage and Redux.
-    localStorage.setItem("data", JSON.stringify(records));
-    dispath(editRecords(records));
-
+    // Reset textarea.
     setValue("");
     setLength(0);
   };
@@ -46,7 +43,11 @@ const AddRecords = () => {
         ></textarea>
         <span>{length}/512</span>
       </div>
-      <Button variant="regular" text="Add record" action={() => addRecord()} />
+      <Button
+        variant="regular"
+        text="Add record"
+        action={() => handleAddBtn()}
+      />
     </div>
   );
 };

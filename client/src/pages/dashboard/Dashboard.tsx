@@ -6,26 +6,43 @@ import { getRecord } from "../../helpers/records/getRecord";
 import Axios from "../../helpers/axios";
 import env from "react-dotenv";
 
-const Dashboard = () => {
+/**
+ * Dashboard page.
+ *
+ * @returns JSX.Element
+ */
+const Dashboard = (): JSX.Element => {
   const interval = useRef<null | NodeJS.Timer>(null);
   const [dSeconds, setDSeconds] = useState(0);
   const seconds = useRef(0);
   const time = env.BOT_DELAY ? parseInt(env.BOT_DELAY) : 86400;
 
-  // Toggle bot.
-  const toggleBot = () => {
+  /**
+   * Toggle bot.
+   *
+   * @returns void
+   */
+  const toggleBot = (): void => {
+    // If interval is not running, create new.
     if (interval.current === null)
       interval.current = setInterval(() => tweet(), 1000);
     else {
+      // If interval is running, clear it.
       clearInterval(interval.current);
       interval.current = null;
+
+      // Reset seconds
       seconds.current = 0;
       setDSeconds(seconds.current);
     }
   };
 
-  // Call server to post tweet.
-  const tweet = () => {
+  /**
+   * Call server to post tweet.
+   *
+   * @return void
+   */
+  const tweet = (): void => {
     seconds.current++;
 
     // Update time on dashboard.

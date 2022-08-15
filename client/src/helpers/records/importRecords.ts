@@ -5,6 +5,8 @@ import { editRecords } from "../../features/recordsSlice";
  * Import records from .json file.
  *
  * @param content string
+ *
+ * @return void
  */
 export const importRecords = (content: string): void => {
   localStorage.setItem("data", JSON.stringify(JSON.parse(content)));
