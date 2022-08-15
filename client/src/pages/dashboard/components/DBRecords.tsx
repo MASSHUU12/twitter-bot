@@ -94,7 +94,7 @@ const DBRecords = (): JSX.Element => {
                     <div className="textarea-container">
                       <textarea
                         minLength={1}
-                        maxLength={512}
+                        maxLength={280}
                         value={item.data.join("\n")}
                         onChange={(e) =>
                           // Update records
@@ -108,7 +108,7 @@ const DBRecords = (): JSX.Element => {
                           )
                         }
                       ></textarea>
-                      <span>{item.data.join("\n").length}/512</span>
+                      <span>{item.data.join("\n").length}/280</span>
                     </div>
                     <p className="db-record-counter">
                       <span>Count: </span>

@@ -17,8 +17,8 @@ const AddRecords = (): JSX.Element => {
    * @returns void
    */
   const handleAddBtn = (): void => {
-    // If textarea is empty, do nothing.
-    if (value.length < 1) return;
+    // If textarea is empty or has more than 280 characters, do nothing.
+    if (value.length < 1 || value.length > 280) return;
 
     // Add record.
     addRecord(value);
@@ -33,7 +33,7 @@ const AddRecords = (): JSX.Element => {
       <div className="textarea-container">
         <textarea
           minLength={1}
-          maxLength={512}
+          maxLength={280}
           placeholder="Lorem ipsum dolor sit amet."
           value={value}
           onChange={(e) => {
@@ -41,7 +41,7 @@ const AddRecords = (): JSX.Element => {
             setLength(e.target.value.length);
           }}
         ></textarea>
-        <span>{length}/512</span>
+        <span>{length}/280</span>
       </div>
       <Button
         variant="regular"
