@@ -1,11 +1,10 @@
 import { useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import { editOn } from "../../../features/editSlice";
 import { editRecords } from "../../../features/recordsSlice";
 import { deleteRecord } from "../../../helpers/records/deleteRecord";
 import { importRecords } from "../../../helpers/records/importRecords";
 import Button from "../../../components/Button";
-import UpdateScreen from "./UpdateScreen";
+import { updateRecords } from "../../../helpers/records/updateRecords";
 import "../../../style/dbRecords.scss";
 
 /**
@@ -16,9 +15,6 @@ import "../../../style/dbRecords.scss";
 const DBRecords = (): JSX.Element => {
   // Holds records from Redux.
   const records = useAppSelector((state) => state.records.value);
-
-  // Indicates whether edit window should be open.
-  const openEdit = useAppSelector((state) => state.edit.value);
   const dispatch = useAppDispatch();
 
   // Reference for file input.
@@ -69,79 +65,69 @@ const DBRecords = (): JSX.Element => {
   }, [dispatch]);
 
   return (
-    <>
-      <div className="db-records-container">
-        <div className="db-records-top">
-          <h2>Records</h2>
-          {/* Import button */}
-          <Button
-            variant="regular"
-            text="Import JSON"
-            action={() => openFileDialog()}
-          />
-          {/* File input */}
-          <input
-            type="file"
-            accept=".json"
-            ref={fileRef}
-            onChange={(e) => handleFileInput(e)}
-            style={{ display: "none" }}
-          />
-        </div>
-        <div className="db-records">
-          {/* Records */}
-          {records
-            ? records["data"].map((item, key) => {
-                return (
-                  <div className="db-record" key={key} data-index={key}>
-                    <div className="db-top">
-                      {/* Textarea */}
-                      <textarea
-                        readOnly
-                        value={item.data.join("\n")}
-                      ></textarea>
-                      <p className="db-record-counter">
-                        <span>Count: </span>
-                        {item.count}
-                      </p>
-                    </div>
-                    {/* Buttons */}
-                    <div className="db-btm">
-                      <Button
-                        variant="regular"
-                        text="Edit record"
-                        action={(e) =>
-                          dispatch(
-                            editOn({
-                              index:
-                                e.target["parentElement"]["parentElement"][
-                                  "parentElement"
-                                ].getAttribute("data-index"),
-                              text: item.data.join("\n"),
-                            })
-                          )
-                        }
-                      />
-                      <Button
-                        variant="error"
-                        text="Delete record"
-                        action={(e) =>
-                          deleteRecord(
-                            e.target["parentElement"]["parentElement"][
-                              "parentElement"
-                            ].getAttribute("data-index")
-                          )
-                        }
-                      />
-                    </div>
-                  </div>
-                );
-              })
-            : "There are no records."}
-        </div>
+    <div className="db-records-container">
+      <div className="db-records-top">
+        <h2>Records</h2>
+        {/* Import button */}
+        <Button
+          variant="regular"
+          text="Import JSON"
+          action={() => openFileDialog()}
+        />
+        {/* File input */}
+        <input
+          type="file"
+          accept=".json"
+          ref={fileRef}
+          onChange={(e) => handleFileInput(e)}
+          style={{ display: "none" }}
+        />
       </div>
-      {openEdit && <UpdateScreen />}
-    </>
+      <div className="db-records">
+        {/* Records */}
+        {records
+          ? records["data"].map((item, key) => {
+              return (
+                <div className="db-record" key={key} data-index={key}>
+                  <div className="db-top">
+                    {/* Textarea */}
+                    <textarea
+                      value={item.data.join("\n")}
+                      onChange={(e) =>
+                        // Update records
+                        updateRecords(
+                          e.target.value,
+                          parseInt(
+                            e.target["parentElement"]![
+                              "parentElement"
+                            ]!.getAttribute("data-index") as string
+                          )
+                        )
+                      }
+                    ></textarea>
+                    <p className="db-record-counter">
+                      <span>Count: </span>
+                      {item.count}
+                    </p>
+                  </div>
+                  {/* Delete button */}
+                  <Button
+                    variant="error"
+                    text="Delete record"
+                    action={(e) =>
+                      deleteRecord(
+                        e.target["parentElement"]["parentElement"][
+                          "parentElement"
+                        ].getAttribute("data-index")
+                      )
+                    }
+                  />
+                </div>
+              );
+            })
+          : "There are no records."}
+      </div>
+    </div>
   );
 };
 
