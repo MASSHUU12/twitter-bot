@@ -2,10 +2,10 @@ import { useRef, useState } from "react";
 import AddRecords from "./components/AddRecords";
 import DBRecords from "./components/DBRecords";
 import Toggle from "../../components/Toggle";
-import { getRecord } from "../../helpers/records/getRecord";
-import Axios from "../../helpers/axios";
 import env from "react-dotenv";
 import "../../style/dashboard.scss";
+import Button from "../../components/Button";
+import { tweet } from "../../helpers/tweet";
 
 /**
  * Dashboard page.
@@ -26,7 +26,7 @@ const Dashboard = (): JSX.Element => {
   const toggleBot = (): void => {
     // If interval is not running, create new.
     if (interval.current === null)
-      interval.current = setInterval(() => tweet(), 1000);
+      interval.current = setInterval(() => callServer(), 1000);
     else {
       // If interval is running, clear it.
       clearInterval(interval.current);
@@ -39,11 +39,11 @@ const Dashboard = (): JSX.Element => {
   };
 
   /**
-   * Call server to post tweet.
+   * Manage working bot.
    *
    * @return void
    */
-  const tweet = (): void => {
+  const callServer = (): void => {
     seconds.current++;
 
     // Update time on dashboard.
@@ -52,31 +52,32 @@ const Dashboard = (): JSX.Element => {
     if (seconds.current >= time) {
       seconds.current = 0;
 
-      // Call an API.
-      Axios.request({
-        url: "/tweet",
-        method: "post",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        data: { data: getRecord().data },
-      })
-        .then(() => console.log("Send"))
-        .catch((err) => console.log(err));
+      // Post tweet.
+      tweet();
     }
   };
 
   return (
-    <div className="dashboard-container">
-      <h1>Dashboard</h1>
-      <div className="toggle-bot-section">
-        <Toggle title="Start bot" toggleTitle="Stop bot" action={toggleBot} />
-        <p>{`${dSeconds}/${time}`}s</p>
+    <>
+      <div className="dashboard-container">
+        <h1>Dashboard</h1>
+        <div className="toggle-bot-section">
+          <div className="toggle-bot-run">
+            {/* Toggle bot */}
+            <Toggle
+              title="Start bot"
+              toggleTitle="Stop bot"
+              action={toggleBot}
+            />
+            <p>{`${dSeconds}/${time}`}s</p>
+          </div>
+          {/* Run bot once */}
+          <Button variant="regular" text="Run once" action={() => tweet()} />
+        </div>
+        <AddRecords />
+        <DBRecords />
       </div>
-      <AddRecords />
-      <DBRecords />
-    </div>
+    </>
   );
 };
 

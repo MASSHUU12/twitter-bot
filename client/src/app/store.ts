@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import recordsReducer from "../features/recordsSlice";
+import notificationReducer from "../features/notificationSlice";
 
 const store = configureStore({
   reducer: {
     records: recordsReducer,
+    notification: notificationReducer,
   },
 });
 

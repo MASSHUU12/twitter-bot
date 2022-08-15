@@ -1,5 +1,6 @@
 import store from "../../app/store";
 import { editRecords } from "../../features/recordsSlice";
+import { newNotification } from "../newNotification";
 
 /**
  * Add record to database.
@@ -19,4 +20,7 @@ export const addRecord = (value: string): void => {
   // Update records in Web Storage and Redux.
   localStorage.setItem("data", JSON.stringify(records));
   store.dispatch(editRecords(records));
+
+  // Added record notification.
+  newNotification("Record added");
 };
