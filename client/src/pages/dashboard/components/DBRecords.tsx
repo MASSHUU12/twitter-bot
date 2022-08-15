@@ -91,20 +91,25 @@ const DBRecords = (): JSX.Element => {
                 <div className="db-record" key={key} data-index={key}>
                   <div className="db-top">
                     {/* Textarea */}
-                    <textarea
-                      value={item.data.join("\n")}
-                      onChange={(e) =>
-                        // Update records
-                        updateRecords(
-                          e.target.value,
-                          parseInt(
-                            e.target["parentElement"]![
-                              "parentElement"
-                            ]!.getAttribute("data-index") as string
+                    <div className="textarea-container">
+                      <textarea
+                        minLength={1}
+                        maxLength={512}
+                        value={item.data.join("\n")}
+                        onChange={(e) =>
+                          // Update records
+                          updateRecords(
+                            e.target.value,
+                            parseInt(
+                              e.target["parentElement"]![
+                                "parentElement"
+                              ]!.getAttribute("data-index") as string
+                            )
                           )
-                        )
-                      }
-                    ></textarea>
+                        }
+                      ></textarea>
+                      <span>{item.data.join("\n").length}/512</span>
+                    </div>
                     <p className="db-record-counter">
                       <span>Count: </span>
                       {item.count}
