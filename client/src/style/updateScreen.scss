@@ -13,7 +13,7 @@
   .update-screen {
     width: 50%;
     height: fit-content;
-    background-color: #fff;
+    background-color: #F5F8FA;
     padding: 2rem;
     border-radius: 0.5rem;
     display: flex;
@@ -30,25 +30,6 @@
       display: flex;
       justify-content: center;
       align-items: flex-end;
-
-      textarea {
-        padding: 1rem;
-        width: 75%;
-        height: 10rem;
-        max-width: 100%;
-        line-height: 1.5;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        box-shadow: 1px 1px 1px #999;
-        margin: 0 0 0.3rem;
-        resize: none;
-      }
-
-      span {
-        position: relative;
-        bottom: 0.6rem;
-        right: 3.3rem
-      }
     }
   }
 }

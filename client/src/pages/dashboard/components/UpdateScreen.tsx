@@ -28,7 +28,7 @@ const UpdateScreen = (): JSX.Element => {
           width="32"
           onClick={() => dispatch(editOff())}
         />
-        <div className="update-screen-inputarea">
+        <div className="update-screen-inputarea textarea-container">
           {/* Textarea */}
           <textarea
             minLength={1}

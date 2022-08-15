@@ -4,6 +4,23 @@
   font-family: "Poppins", sans-serif;
 }
 
+::-webkit-scrollbar {
+  width: 0.8rem;
+}
+
+::-webkit-scrollbar-track {
+  background: #F5F8FA;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #657786;
+  border-radius: 0.3rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #AAB8C2;
+}
+
 body {
   font-size: 1rem;
   margin: 1rem 5rem;
@@ -38,6 +55,7 @@ textarea {
   span {
     position: relative;
     bottom: 1rem;
-    right: 3.3rem
+    right: 3.3rem;
+    color: #AAB8C2;
   }
 }
