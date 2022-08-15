@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useAppDispatch } from "../app/hooks";
-import { editRecords } from "../features/recordsSlice";
-import Button from "./Button";
+import { useAppDispatch } from "../../../app/hooks";
+import { editRecords } from "../../../features/recordsSlice";
+import Button from "../../../components/Button";
 
 /**
  * Add record to database.

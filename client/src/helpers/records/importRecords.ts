@@ -1,5 +1,5 @@
-import store from "../app/store";
-import { editRecords } from "../features/recordsSlice";
+import store from "../../app/store";
+import { editRecords } from "../../features/recordsSlice";
 
 /**
  * Import records from .json file.

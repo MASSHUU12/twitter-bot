@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Button from "./Button";
+import Button from "../../../components/Button";
 import { Icon } from "@iconify/react";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { editOff } from "../features/editSlice";
-import { updateRecords } from "../helpers/updateRecords";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { editOff } from "../../../features/editSlice";
+import { updateRecords } from "../../../helpers/records/updateRecords";
 
 /**
  * Update records in database.

@@ -1,10 +1,10 @@
 import { useEffect, useRef } from "react";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { editOn } from "../features/editSlice";
-import { editRecords } from "../features/recordsSlice";
-import { deleteRecord } from "../helpers/deleteRecord";
-import { importRecords } from "../helpers/importRecords";
-import Button from "./Button";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { editOn } from "../../../features/editSlice";
+import { editRecords } from "../../../features/recordsSlice";
+import { deleteRecord } from "../../../helpers/records/deleteRecord";
+import { importRecords } from "../../../helpers/records/importRecords";
+import Button from "../../../components/Button";
 import UpdateScreen from "./UpdateScreen";
 
 const DBRecords = () => {

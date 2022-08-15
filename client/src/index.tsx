@@ -1,9 +1,9 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import App from "./pages/App";
-import Auth from "./pages/Auth";
-import Dashboard from "./pages/Dashboard";
-import E404 from "./pages/E404";
+import App from "./pages/home/App";
+import Auth from "./pages/auth/Auth";
+import Dashboard from "./pages/dashboard/Dashboard";
+import E404 from "./pages/errors/E404";
 import "./style/style.scss";
 import store from "./app/store";
 import { Provider } from "react-redux";

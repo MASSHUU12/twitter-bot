@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
-import AddRecords from "../components/AddRecords";
-import DBRecords from "../components/DBRecords";
-import Toggle from "../components/Toggle";
-import { getRecord } from "../helpers/getRecord";
-import Axios from "../helpers/axios";
+import AddRecords from "./components/AddRecords";
+import DBRecords from "./components/DBRecords";
+import Toggle from "../../components/Toggle";
+import { getRecord } from "../../helpers/records/getRecord";
+import Axios from "../../helpers/axios";
 import env from "react-dotenv";
 
 const Dashboard = () => {
