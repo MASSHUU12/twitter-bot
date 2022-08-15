@@ -5,6 +5,7 @@ import Toggle from "../../components/Toggle";
 import { getRecord } from "../../helpers/records/getRecord";
 import Axios from "../../helpers/axios";
 import env from "react-dotenv";
+import "../../style/dashboard.scss";
 
 /**
  * Dashboard page.
@@ -67,9 +68,9 @@ const Dashboard = (): JSX.Element => {
   };
 
   return (
-    <div>
+    <div className="dashboard-container">
       <h1>Dashboard</h1>
-      <div className="btn-toggle-section">
+      <div className="toggle-bot-section">
         <Toggle title="Start bot" toggleTitle="Stop bot" action={toggleBot} />
         <p>{`${dSeconds}/${time}`}s</p>
       </div>

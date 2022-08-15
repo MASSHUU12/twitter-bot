@@ -30,7 +30,7 @@ const AddRecords = (): JSX.Element => {
 
   return (
     <div className="add-records-container">
-      <div className="add-records-inputarea">
+      <div className="textarea-container">
         <textarea
           minLength={1}
           maxLength={512}

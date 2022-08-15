@@ -1,0 +1,16 @@
+.toggle-btn {
+  background-color: #1d9bf0;
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  color: #fff;
+  cursor: pointer;
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.toggle-btn:hover {
+  filter: brightness(85%);
+}

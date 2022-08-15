@@ -1,0 +1,19 @@
+.db-records-container {
+  .db-records-top {
+    margin: 0 0 1rem;
+  }
+
+  .db-records {
+    .db-record {
+      margin: 1rem 0 0 0;
+
+      .db-btm {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 1rem;
+      }
+    }
+  }
+}

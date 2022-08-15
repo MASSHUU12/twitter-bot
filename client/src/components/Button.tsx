@@ -1,3 +1,5 @@
+import "../style/button.scss";
+
 interface Props {
   variant: "regular" | "error";
   text: string;

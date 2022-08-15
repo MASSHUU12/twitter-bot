@@ -1,5 +1,6 @@
 import { Icon } from "@iconify/react";
 import { useState } from "react";
+import "../style/buttonToggle.scss";
 
 interface Props {
   title: string;

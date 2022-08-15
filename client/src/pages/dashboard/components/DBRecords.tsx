@@ -6,6 +6,7 @@ import { deleteRecord } from "../../../helpers/records/deleteRecord";
 import { importRecords } from "../../../helpers/records/importRecords";
 import Button from "../../../components/Button";
 import UpdateScreen from "./UpdateScreen";
+import "../../../style/dbRecords.scss";
 
 /**
  * Manages database records.
@@ -70,21 +71,23 @@ const DBRecords = (): JSX.Element => {
   return (
     <>
       <div className="db-records-container">
-        <h3>Records</h3>
-        {/* Import button */}
-        <Button
-          variant="regular"
-          text="Import JSON"
-          action={() => openFileDialog()}
-        />
-        {/* File input */}
-        <input
-          type="file"
-          accept=".json"
-          ref={fileRef}
-          onChange={(e) => handleFileInput(e)}
-          style={{ display: "none" }}
-        />
+        <div className="db-records-top">
+          <h2>Records</h2>
+          {/* Import button */}
+          <Button
+            variant="regular"
+            text="Import JSON"
+            action={() => openFileDialog()}
+          />
+          {/* File input */}
+          <input
+            type="file"
+            accept=".json"
+            ref={fileRef}
+            onChange={(e) => handleFileInput(e)}
+            style={{ display: "none" }}
+          />
+        </div>
         <div className="db-records">
           {/* Records */}
           {records
@@ -94,7 +97,6 @@ const DBRecords = (): JSX.Element => {
                     <div className="db-top">
                       {/* Textarea */}
                       <textarea
-                        className="db-record-text"
                         readOnly
                         value={item.data.join("\n")}
                       ></textarea>

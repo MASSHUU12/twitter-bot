@@ -4,9 +4,9 @@ import App from "./pages/home/App";
 import Auth from "./pages/auth/Auth";
 import Dashboard from "./pages/dashboard/Dashboard";
 import E404 from "./pages/errors/E404";
-import "./style/style.scss";
 import store from "./app/store";
 import { Provider } from "react-redux";
+import "./style/globals.scss";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

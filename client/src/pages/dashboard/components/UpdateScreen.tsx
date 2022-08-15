@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { editOff } from "../../../features/editSlice";
 import { updateRecords } from "../../../helpers/records/updateRecords";
+import "../../../style/updateScreen.scss";
 
 /**
  * Update records in database.
