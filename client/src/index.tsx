@@ -8,7 +8,7 @@ import store from "./app/store";
 import { Provider } from "react-redux";
 import "./style/globals.scss";
 import React from "react";
-import Notification from "./pages/dashboard/components/Notification";
+import Notification from "./components/Notification";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

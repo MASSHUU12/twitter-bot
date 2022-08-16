@@ -101,7 +101,7 @@ const DBRecords = (): JSX.Element => {
                           updateRecords(
                             e.target.value,
                             parseInt(
-                              e.target["parentElement"]![
+                              e.target["parentElement"]!["parentElement"]![
                                 "parentElement"
                               ]!.getAttribute("data-index") as string
                             )
