@@ -1,5 +1,7 @@
 # Twitter Bot
 
+> Do not pay attention to the appearance, in this project it does not matter (in the beginning, the whole program was to be console anyway), but maybe I will improve it.
+
 A tool for automatic posting on Twitter at set intervals.
 
 I set a goal that this program can be used with as little configuration as possible, and without the need to install a ton of other programs. As such, this program only requires Node, nor does it use a database (not counting Web Storage).
